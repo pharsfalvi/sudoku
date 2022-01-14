@@ -8,4 +8,4 @@
  */
 
 rootProject.name = "sudoku"
-include("app")
+include("validate")
