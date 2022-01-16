@@ -3,8 +3,8 @@
  */
 package com.moc.sudoku;
 
-import com.moc.sudoku.service.ValidationException;
 import com.moc.sudoku.service.Parser;
+import com.moc.sudoku.service.ValidationException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class UsageTest {
 
@@ -34,8 +34,11 @@ class UsageTest {
 
     @Test
     void givenNoSolutionFileProvided_thenValidationExceptionThrownWithUsage() {
-        ValidationException exception = assertThrows(ValidationException.class, () -> new Parser().load(""));
-        System.out.println(exception.getMessage());
+        try {
+            new Parser().load("");
+        } catch (ValidationException e) {
+            System.out.println(e.getMessage()); // NOPMD
+        }
         assertTrue(outContent.toString().contains("Usage:"), "app should print Usage in case no solution file provided");
     }
 }

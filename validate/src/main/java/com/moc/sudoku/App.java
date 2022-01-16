@@ -12,9 +12,9 @@ import java.util.List;
 
 public class App {
 
-    private final Parser parser = new Parser();
-    private final Converter converter = new Converter();
-    private final Validator validator = new Validator();
+    private final transient Parser parser = new Parser();
+    private final transient Converter converter = new Converter();
+    private final transient Validator validator = new Validator();
 
     private void run(String fileName) {
         List<String[]> lines = parser.load(fileName);
@@ -26,7 +26,7 @@ public class App {
         try {
             new App().run(args.length == 0 ? "" : args[0]);
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage()); // NOPMD
             System.exit(1);
         }
     }

@@ -9,6 +9,10 @@
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
+    // Apply the Java Code Coverage plugin
+    jacoco
+    // Code quality plugins
+    pmd
 }
 
 repositories {
@@ -17,11 +21,19 @@ repositories {
 }
 
 dependencies {
+    val junitBomVersion = "5.8.2"
+    implementation(platform("org.junit:junit-bom:$junitBomVersion")) {
+        because("Platform, Jupiter, and Vintage versions should match")
+    }
     // Use JUnit Jupiter for testing.
-    testImplementation("org.junit.jupiter:junit-jupiter:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter")
 
-    // This dependency is used by the application.
-    implementation("com.google.guava:guava:30.1.1-jre")
+    // Library for testing system exit
+    testImplementation("com.github.stefanbirkner:system-rules:1.19.0")
+
+    testRuntimeOnly("org.junit.vintage:junit-vintage-engine") {
+        because("allows system-rules requires JUnit 4")
+    }
 }
 
 application {
@@ -29,7 +41,21 @@ application {
     mainClass.set("com.moc.sudoku.App")
 }
 
-tasks.named<Test>("test") {
+tasks.test {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+
+    finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+}
+
+pmd {
+    isConsoleOutput = true
+    isIgnoreFailures = true
+    toolVersion = "6.36.0"
+    rulesMinimumPriority.set(5)
+    ruleSets = listOf("category/java/errorprone.xml", "category/java/bestpractices.xml")
 }
