@@ -36,7 +36,11 @@ Unpack the distributed package into any destination folder.
 * *Linux or Mac:* use the command `tar xvf validate.tar`
 * *Windows:* right-click the `validate.zip` file and click Extract All.
 
-
+### Troubleshooting
+* *LinkageError:* - this may happen when you build the project but execute the distribution with a different java versoin. 
+Make sure that your JAVA_HOME and PATH is configured properly.
+* *File does not exists.:* - the input file can be provided either with path relative to the current directory or with an absolute path. 
+If the directory name contains a whitespace, put the whole expression between double-quotes.
 ### References
 * [Sudoku on Wikipedia](https://en.wikipedia.org/wiki/Sudoku)
 * [Gradle](https://docs.gradle.org/7.3.3/userguide/userguide.html) - build tool
