@@ -28,8 +28,8 @@ steps:
 - task: PublishCodeCoverageResults@1
   inputs:
     codeCoverageTool: 'JaCoCo' 
-    summaryFileLocation: '${System.DefaultWorkingDirectory}/**/reports/jacoco/test/jacocoTestReport.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/**/reports/jacoco/test/html'
-    pathToSources: '(System.DefaultWorkingDirectory)'
-    additionalCodeCoverageFiles: '$(System.DefaultWorkingDirectory)/**/jacoco/test.exec'
+    summaryFileLocation: '$(System.DefaultWorkingDirectory)/validate/build/reports/jacoco/test/jacocoTestReport.xml'
+    reportDirectory: '$(System.DefaultWorkingDirectory)/validate/build/reports/jacoco/test/html'
+    pathToSources: '$(System.DefaultWorkingDirectory)'
+    additionalCodeCoverageFiles: '$(System.DefaultWorkingDirectory)/validate/build/jacoco/test.exec'
     failIfCoverageEmpty: true
