@@ -30,5 +30,6 @@ steps:
     codeCoverageTool: 'JaCoCo' 
     summaryFileLocation: '${System.DefaultWorkingDirectory}/**/reports/jacoco/test/jacocoTestReport.xml'
     reportDirectory: '$(System.DefaultWorkingDirectory)/**/reports/jacoco/test/html'
-    pathToSources: '(System.DefaultWorkingDirectory)/**/src/main/java/'
+    pathToSources: '(System.DefaultWorkingDirectory)'
+    additionalCodeCoverageFiles: '$(System.DefaultWorkingDirectory)/**/jacoco/test.exec'
     failIfCoverageEmpty: true
